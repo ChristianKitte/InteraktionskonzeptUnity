@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4890208383389173568, guid: 2f496e01714835a4e878f765af4c3264, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890208383389173572, guid: 2f496e01714835a4e878f765af4c3264, type: 3}
+      propertyPath: m_ReceiveGI
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4890208383389173572, guid: 2f496e01714835a4e878f765af4c3264, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4890208384409524408, guid: 2f496e01714835a4e878f765af4c3264, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1314,4 +1326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 208547db06157f14c83423ea7c705291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startRay: {fileID: 7474194329031564754}
+  startRay: {fileID: 0}
+  rayLength: 100
+  selectionTag: Steg

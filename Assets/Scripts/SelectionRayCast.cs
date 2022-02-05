@@ -17,14 +17,22 @@ public class SelectionRayCast : MonoBehaviour
     [SerializeField] private Transform startRay;
     [SerializeField] private float rayLength = 100f;
     [SerializeField] private string selectionTag;
+    [SerializeField] private LocomotionManager locomotionManager;
 
     private GameObject _selectedObject;
     private Renderer _currentRenderer;
 
+    private LocomotionManager _locomotionManager;
+
+    private void Awake()
+    {
+        _locomotionManager = locomotionManager.GetComponent<LocomotionManager>();
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (_selectedObject != null && _currentRenderer != null)
+        if (_locomotionManager.TriggerIsActive && _selectedObject != null && _currentRenderer != null)
         {
             _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
         }
@@ -35,7 +43,7 @@ public class SelectionRayCast : MonoBehaviour
     {
         // Physics.Raycast gibt True zurück, sofern eine Kollision stattgefunden hat.
         // Die Out Variable hit enthält in diesem Fall ein RaycastHit Object.
-        if (Physics.Raycast(
+        if (_locomotionManager.TriggerIsActive && Physics.Raycast(
             startRay.transform.position,
             startRay.transform.forward,
             out var hit,
@@ -43,7 +51,6 @@ public class SelectionRayCast : MonoBehaviour
         ))
         {
             _selectedObject = hit.transform.gameObject;
-
             if (_selectedObject != null)
             {
                 _currentRenderer = _selectedObject.GetComponent<Renderer>();
@@ -52,13 +59,18 @@ public class SelectionRayCast : MonoBehaviour
                 {
                     // Debug.Log("Select :" + hit.collider.name);
                     _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                    _locomotionManager.ActiveObject = _selectedObject;
+
+                    Debug.Log("Objekt gefunden...");
                 }
             }
         }
         else
         {
-            // Debug.Log("Kein Kollision");
+            // Debug.Log("No collision or no trigger");
             _selectedObject = null;
         }
+
+        _locomotionManager.WriteDebugMessage();
     }
 }

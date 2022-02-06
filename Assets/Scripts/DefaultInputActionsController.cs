@@ -11,23 +11,23 @@ public class DefaultInputActionsController : MonoBehaviour
     private XRIDefaultInputActions _controls;
     private XRRayInteractor _rayInteractor;
 
-    [SerializeField] GameObject leftRayController;
-    [SerializeField] LocomotionManager _locomotionManager;
+    [SerializeField] GameObject leftController;
+    [SerializeField] GameObject rightController;
+    [SerializeField] InteractionManager interactionManager;
 
     private void Awake()
     {
-        _rayInteractor = leftRayController.GetComponent<XRRayInteractor>();
+        _rayInteractor = leftController.GetComponent<XRRayInteractor>();
         _controls = new XRIDefaultInputActions();
 
-        _controls.XRILeftHand.Select.started += ctr => performSelection();
+        _controls.XRILeftHand.Select.performed += ctr => performSelection();
     }
 
     private void LateUpdate()
     {
         _rayInteractor.enabled = _controls.XRILeftHand.Activate.IsPressed();
-        _locomotionManager.TriggerIsActive = _controls.XRILeftHand.Activate.IsPressed();
 
-        _locomotionManager.WriteDebugMessage();
+        interactionManager.TriggerIsActive = _controls.XRILeftHand.Activate.IsPressed();
     }
 
     private void OnEnable()
@@ -42,6 +42,6 @@ public class DefaultInputActionsController : MonoBehaviour
 
     private void performSelection()
     {
-        _locomotionManager.performSelection();
+        interactionManager.performSelection();
     }
 }

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 882777792}
   - component: {fileID: 882777793}
   m_Layer: 0
-  m_Name: LocomotionManager
+  m_Name: InteractionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -487,8 +487,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62eef26c4257a954e99a3cfe9def22cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftRayController: {fileID: 7474194329031564755}
-  _locomotionManager: {fileID: 882777793}
+  leftController: {fileID: 7474194329031564755}
+  rightController: {fileID: 7474194328261849001}
+  interactionManager: {fileID: 882777793}
 --- !u!114 &7474194328241601840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1088,7 +1089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
-  m_EnableInputActions: 1
+  m_EnableInputActions: 0
   m_ModelPrefab: {fileID: 0}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
@@ -1397,4 +1398,4 @@ MonoBehaviour:
   startRay: {fileID: 7474194329031564754}
   rayLength: 100
   selectionTag: Steg
-  locomotionManager: {fileID: 882777793}
+  interactionManager: {fileID: 882777793}

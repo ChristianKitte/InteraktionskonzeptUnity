@@ -6,29 +6,17 @@ using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.XR.Interaction.Toolkit;
 
+/// <summary>
+/// In Projekt Settings vor Default Ausführung gesetzt.
+/// </summary>
 public class DefaultInputActionsController : MonoBehaviour
 {
     private XRIDefaultInputActions _controls;
     private XRRayInteractor _rayInteractor;
 
     [SerializeField] GameObject leftController;
+
     [SerializeField] GameObject rightController;
-    [SerializeField] InteractionManager interactionManager;
-
-    private void Awake()
-    {
-        _rayInteractor = leftController.GetComponent<XRRayInteractor>();
-        _controls = new XRIDefaultInputActions();
-
-        _controls.XRILeftHand.Select.performed += ctr => performSelection();
-    }
-
-    private void LateUpdate()
-    {
-        _rayInteractor.enabled = _controls.XRILeftHand.Activate.IsPressed();
-
-        interactionManager.TriggerIsActive = _controls.XRILeftHand.Activate.IsPressed();
-    }
 
     private void OnEnable()
     {
@@ -40,8 +28,22 @@ public class DefaultInputActionsController : MonoBehaviour
         _controls.XRILeftHand.Disable();
     }
 
-    private void performSelection()
+    private void Awake()
     {
-        interactionManager.performSelection();
+        _rayInteractor = leftController.GetComponent<XRRayInteractor>();
+        _controls = new XRIDefaultInputActions();
+
+        _controls.XRILeftHand.Select.started += ctx => selectionStarted();
+    }
+
+    private void Update()
+    {
+        _rayInteractor.enabled = _controls.XRILeftHand.Activate.IsPressed();
+        InteractionManager.Instance.TriggerIsActive = _controls.XRILeftHand.Activate.IsPressed();
+    }
+
+    private void selectionStarted()
+    {
+        InteractionManager.Instance.StartSelection = true;
     }
 }

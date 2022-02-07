@@ -16,28 +16,20 @@ public class SelectionRayCast : MonoBehaviour
     private GameObject _currentObject;
     private Renderer _currentRenderer;
 
-    private InteractionManager _interactionManager;
-
-    private void Awake()
-    {
-        _interactionManager = interactionManager.GetComponent<InteractionManager>();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (_interactionManager.TriggerIsActive && _currentObject != null && _currentRenderer != null)
+        if (InteractionManager.Instance.TriggerIsActive && _currentObject != null && _currentRenderer != null)
         {
             _currentObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
         }
     }
 
-    // LastUpdate is called once per frame if Behaviour is enabled
     private void LateUpdate()
     {
         // Physics.Raycast gibt True zurück, sofern eine Kollision stattgefunden hat.
         // Die Out Variable hit enthält in diesem Fall ein RaycastHit Object.
-        if (_interactionManager.TriggerIsActive && Physics.Raycast(
+        if (InteractionManager.Instance.TriggerIsActive && Physics.Raycast(
             startRay.transform.position,
             startRay.transform.forward,
             out var hit,
@@ -45,6 +37,8 @@ public class SelectionRayCast : MonoBehaviour
         ))
         {
             _currentObject = hit.transform.gameObject;
+            //Debug.Log("_currentObject1: " + _currentObject);
+
             if (_currentObject != null)
             {
                 _currentRenderer = _currentObject.GetComponent<Renderer>();
@@ -52,7 +46,7 @@ public class SelectionRayCast : MonoBehaviour
                 if (_currentRenderer != null && _currentObject.CompareTag(selectionTag))
                 {
                     _currentObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-                    _interactionManager.ActiveObject = _currentObject;
+                    InteractionManager.Instance.CurrentObject = _currentObject;
                 }
             }
         }

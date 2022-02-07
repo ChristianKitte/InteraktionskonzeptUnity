@@ -1,13 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
     private GameObject _selectedObject = null;
-    private GameObject _activeObject = null;
-    private bool _triggerActive = false;
+    private GameObject _currentObject = null;
+
+    private bool _triggerIsActive = false;
+    private bool _startSelection = false;
+
+    public static InteractionManager Instance { get; private set; }
 
     public GameObject SelectedObject
     {
@@ -15,89 +21,91 @@ public class InteractionManager : MonoBehaviour
         set => _selectedObject = value;
     }
 
-    public GameObject ActiveObject
+    public GameObject CurrentObject
     {
-        get => _activeObject;
-        set => _activeObject = value;
+        get => _currentObject;
+        set => _currentObject = value;
     }
 
     public bool TriggerIsActive
     {
-        get => _triggerActive;
-        set => _triggerActive = value;
+        get => _triggerIsActive;
+        set => _triggerIsActive = value;
+    }
+
+    public bool StartSelection
+    {
+        get => _startSelection;
+        set => _startSelection = value;
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+
+        //DontDestroyOnLoad(InteractionManager.Instance); // es gibt nur eine Szene...
+        Instance = this;
     }
 
     private void LateUpdate()
     {
-        if (_activeObject != null)
+        if (_startSelection && _triggerIsActive)
         {
-            if (_selectedObject == null && TriggerIsActive)
+            if (_currentObject == null) // fertig
             {
-                _selectedObject = _activeObject;
-                _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-
-                Debug.Log("Selected Obj is null");
-                Debug.Log("1");
+                _startSelection = false;
             }
-            else if (_selectedObject != null && !_selectedObject.Equals(_activeObject) && TriggerIsActive)
+            else if (_currentObject != null)
             {
-                _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
-                _selectedObject = _activeObject;
-                _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                if (_selectedObject == null) // selektieren
+                {
+                    _selectedObject = _currentObject;
+                    _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
 
-                Debug.Log(_selectedObject.name);
-                Debug.Log("2");
-            }
-            else if (SelectedObject != null && _selectedObject.Equals(_activeObject) && TriggerIsActive)
-            {
-                Debug.Log(_selectedObject.name);
+                    _startSelection = false;
+                }
+                else if (_selectedObject.Equals(_currentObject)) // deselektieren
+                {
+                    _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                    _selectedObject = null;
 
-                _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
-                _selectedObject = null;
+                    _startSelection = false;
+                }
+                else if (!_selectedObject.Equals(_currentObject)) // deselektieren und selektieren
+                {
+                    _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                    _selectedObject = null;
 
-                Debug.Log("3");
+                    _selectedObject = _currentObject;
+                    _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+
+                    _startSelection = false;
+                }
+
+                var text = GameObject.Find("SelectionInfo").GetComponent<TextMeshPro>();
+                if (text != null)
+                {
+                    if (_selectedObject != null)
+                    {
+                        text.text = _selectedObject.name;
+                    }
+                    else
+                    {
+                        text.text = "kein Objekt";
+                    }
+                }
             }
         }
     }
 
-    public void performSelection()
-    {/*
-        if (_activeObject != null)
-        {
-            if (_selectedObject == null && TriggerIsActive)
-            {
-                _selectedObject = _activeObject;
-                _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-
-                Debug.Log("Selected Obj is null");
-                Debug.Log("1");
-            }
-            else if (_selectedObject != null && !_selectedObject.Equals(_activeObject) && TriggerIsActive)
-            {
-                _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
-                _selectedObject = _activeObject;
-                _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
-
-                Debug.Log(_selectedObject.name);
-                Debug.Log("2");
-            }
-            else if (SelectedObject != null && _selectedObject.Equals(_activeObject) && TriggerIsActive)
-            {
-                Debug.Log(_selectedObject.name);
-
-                _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
-                _selectedObject = null;
-
-                Debug.Log("3");
-            }
-        }*/
-    }
-
     public void WriteDebugMessage()
     {
-        if (_activeObject != null)
+        if (_currentObject != null)
         {
-            Debug.Log("Active object is: " + _activeObject.name);
+            Debug.Log("Active object is: " + _currentObject.name);
         }
         else
         {
@@ -113,6 +121,7 @@ public class InteractionManager : MonoBehaviour
             Debug.Log("No selecetd object");
         }
 
-        Debug.Log("Trigger is: " + _triggerActive.ToString());
+        Debug.Log("Trigger is: " + _triggerIsActive.ToString());
+        Debug.Log("Trigger is: " + _startSelection.ToString());
     }
 }

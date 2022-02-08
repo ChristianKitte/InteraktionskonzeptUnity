@@ -40,6 +40,7 @@ public class DefaultInputActionsController : MonoBehaviour
     {
         _rayInteractor.enabled = _controls.XRILeftHand.Activate.IsPressed();
         InteractionManager.Instance.TriggerIsActive = _controls.XRILeftHand.Activate.IsPressed();
+        InteractionManager.Instance.GripIsActive = _controls.XRILeftHand.Select.IsPressed();
     }
 
     private void selectionStarted()

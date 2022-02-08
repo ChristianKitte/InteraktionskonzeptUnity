@@ -1559,6 +1559,8 @@ GameObject:
   - component: {fileID: 7474194329031564748}
   - component: {fileID: 7474194329031564749}
   - component: {fileID: 7474194329031564756}
+  - component: {fileID: 7474194329031564757}
+  - component: {fileID: 7474194329031564758}
   m_Layer: 0
   m_Name: LeftHand Controller
   m_TagString: Untagged
@@ -1582,3 +1584,57 @@ MonoBehaviour:
   rayLength: 100
   selectionTag: Steg
   interactionManager: {fileID: 0}
+--- !u!114 &7474194329031564757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474194329031564755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 391359a5de03a524283ec0c70bb02abd, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4241503a-7b9c-4060-8b68-57800cd3718b
+    m_ActionName: Default/Movement
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 11a99e0a-26a7-46be-9a8e-e2d14e7aeb23
+    m_ActionName: Default/UpDown
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Default
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
+--- !u!114 &7474194329031564758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7474194329031564755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9942f9989d03c5c4098230b4d16388c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionManager: {fileID: 882777793}
+  controllerAsset: {fileID: -944628639613478452, guid: 391359a5de03a524283ec0c70bb02abd, type: 3}
+  controller: {fileID: 0}
+  speed: 5

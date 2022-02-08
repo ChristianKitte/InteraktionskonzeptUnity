@@ -11,6 +11,7 @@ public class InteractionManager : MonoBehaviour
     private GameObject _currentObject = null;
 
     private bool _triggerIsActive = false;
+    private bool _gripIsActive = false;
     private bool _startSelection = false;
 
     public static InteractionManager Instance { get; private set; }
@@ -31,6 +32,12 @@ public class InteractionManager : MonoBehaviour
     {
         get => _triggerIsActive;
         set => _triggerIsActive = value;
+    }
+
+    public bool GripIsActive
+    {
+        get => _gripIsActive;
+        set => _gripIsActive = value;
     }
 
     public bool StartSelection
@@ -99,6 +106,10 @@ public class InteractionManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void MoveSelectedObject(Vector3 move3DVector)
+    {
     }
 
     public void WriteDebugMessage()

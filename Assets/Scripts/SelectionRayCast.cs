@@ -19,7 +19,7 @@ public class SelectionRayCast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (InteractionManager.Instance.TriggerIsActive && _currentObject != null && _currentRenderer != null)
+        if (InteractionManager.Instance.LeftTriggerIsActive && _currentObject != null && _currentRenderer != null)
         {
             _currentObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
         }
@@ -29,7 +29,7 @@ public class SelectionRayCast : MonoBehaviour
     {
         // Physics.Raycast gibt True zurück, sofern eine Kollision stattgefunden hat.
         // Die Out Variable hit enthält in diesem Fall ein RaycastHit Object.
-        if (InteractionManager.Instance.TriggerIsActive && Physics.Raycast(
+        if (InteractionManager.Instance.LeftTriggerIsActive && Physics.Raycast(
             startRay.transform.position,
             startRay.transform.forward,
             out var hit,

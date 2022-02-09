@@ -10,8 +10,9 @@ public class InteractionManager : MonoBehaviour
     private GameObject _selectedObject = null;
     private GameObject _currentObject = null;
 
-    private bool _triggerIsActive = false;
-    private bool _gripIsActive = false;
+    private bool _leftLeftTriggerIsActive = false;
+    private bool _leftGripIsActive = false;
+    private bool _rightGripIsActive = false;
     private bool _startSelection = false;
 
     public static InteractionManager Instance { get; private set; }
@@ -28,16 +29,22 @@ public class InteractionManager : MonoBehaviour
         set => _currentObject = value;
     }
 
-    public bool TriggerIsActive
+    public bool LeftTriggerIsActive
     {
-        get => _triggerIsActive;
-        set => _triggerIsActive = value;
+        get => _leftLeftTriggerIsActive;
+        set => _leftLeftTriggerIsActive = value;
     }
 
-    public bool GripIsActive
+    public bool LeftGripIsActive
     {
-        get => _gripIsActive;
-        set => _gripIsActive = value;
+        get => _leftGripIsActive;
+        set => _leftGripIsActive = value;
+    }
+
+    public bool RightGripIsActive
+    {
+        get => _rightGripIsActive;
+        set => _rightGripIsActive = value;
     }
 
     public bool StartSelection
@@ -59,7 +66,7 @@ public class InteractionManager : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_startSelection && _triggerIsActive)
+        if (_startSelection && _leftLeftTriggerIsActive)
         {
             if (_currentObject == null) // fertig
             {
@@ -71,38 +78,32 @@ public class InteractionManager : MonoBehaviour
                 {
                     _selectedObject = _currentObject;
                     _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                    _selectedObject.GetComponent<Rigidbody>().isKinematic = true;
 
                     _startSelection = false;
+                    _currentObject = null;
                 }
                 else if (_selectedObject.Equals(_currentObject)) // deselektieren
                 {
                     _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                    _selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     _selectedObject = null;
 
                     _startSelection = false;
+                    _currentObject = null;
                 }
                 else if (!_selectedObject.Equals(_currentObject)) // deselektieren und selektieren
                 {
                     _selectedObject.GetComponent<Renderer>().material.DisableKeyword("_EMISSION");
+                    _selectedObject.GetComponent<Rigidbody>().isKinematic = false;
                     _selectedObject = null;
 
                     _selectedObject = _currentObject;
                     _selectedObject.GetComponent<Renderer>().material.EnableKeyword("_EMISSION");
+                    _selectedObject.GetComponent<Rigidbody>().isKinematic = true;
 
                     _startSelection = false;
-                }
-
-                var text = GameObject.Find("SelectionInfo").GetComponent<TextMeshPro>();
-                if (text != null)
-                {
-                    if (_selectedObject != null)
-                    {
-                        text.text = _selectedObject.name;
-                    }
-                    else
-                    {
-                        text.text = "kein Objekt";
-                    }
+                    _currentObject = null;
                 }
             }
         }
@@ -132,7 +133,7 @@ public class InteractionManager : MonoBehaviour
             Debug.Log("No selecetd object");
         }
 
-        Debug.Log("Trigger is: " + _triggerIsActive.ToString());
+        Debug.Log("Trigger is: " + _leftLeftTriggerIsActive.ToString());
         Debug.Log("Trigger is: " + _startSelection.ToString());
     }
 }

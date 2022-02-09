@@ -21826,6 +21826,7 @@ GameObject:
   - component: {fileID: 2349740351664608674}
   - component: {fileID: 7193302816557401971}
   - component: {fileID: 4143139062578238030}
+  - component: {fileID: 8517117624830152518}
   m_Layer: 6
   m_Name: Cube
   m_TagString: Steg
@@ -21909,6 +21910,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &8517117624830152518
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8304027584050626408}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8537673188761088516
 GameObject:
   m_ObjectHideFlags: 0

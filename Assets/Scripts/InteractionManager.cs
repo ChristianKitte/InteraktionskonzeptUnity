@@ -109,10 +109,6 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
-    public void MoveSelectedObject(Vector3 move3DVector)
-    {
-    }
-
     public void WriteDebugMessage()
     {
         if (_currentObject != null)

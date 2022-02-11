@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -53,6 +54,8 @@ public class InteractionManager : MonoBehaviour
         set => _startSelection = value;
     }
 
+    public string GroundDistanceString { get; set; }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -60,7 +63,6 @@ public class InteractionManager : MonoBehaviour
             Destroy(this);
         }
 
-        //DontDestroyOnLoad(InteractionManager.Instance); // es gibt nur eine Szene...
         Instance = this;
     }
 

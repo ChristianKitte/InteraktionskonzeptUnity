@@ -17,6 +17,7 @@ public class PositionRayCast : MonoBehaviour
     void Update()
     {
         PositionLineRenderer.enabled = false;
+        InteractionManager.Instance.GroundDistanceString = "no ground";
 
         if (InteractionManager.Instance.SelectedObject != null)
         {
@@ -33,6 +34,8 @@ public class PositionRayCast : MonoBehaviour
 
                     PositionLineRenderer.SetPositions(new[] { _startRayVector3D, _endRayVector3D });
                     PositionLineRenderer.enabled = true;
+
+                    InteractionManager.Instance.GroundDistanceString = hitInfo.distance.ToString();
                 }
             }
         }

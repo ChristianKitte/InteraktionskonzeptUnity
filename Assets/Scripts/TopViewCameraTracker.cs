@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SideViewCameraTracker : MonoBehaviour
+public class TopViewCameraTracker : MonoBehaviour
 {
     [SerializeField] private Camera Camera;
 
@@ -22,8 +22,8 @@ public class SideViewCameraTracker : MonoBehaviour
             float Abstand = 10.0f;
 
             Camera.transform.position = new Vector3(
-                selectedTransform.position.x + Vector3.right.x * Abstand,
-                selectedTransform.position.y,
+                selectedTransform.position.x,
+                selectedTransform.position.y + Vector3.up.y * Abstand,
                 selectedTransform.position.z);
 
             Camera.transform.LookAt(selectedTransform.position);

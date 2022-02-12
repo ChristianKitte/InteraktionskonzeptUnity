@@ -15,6 +15,7 @@ public class ControllerInput : MonoBehaviour
     private Vector3 move3DVector;
     private Vector3 upDown3DVector;
 
+    [SerializeField] private Camera mainCamera;
     [SerializeField] private InputActionAsset controllerAsset;
     [SerializeField] GameObject leftController;
 
@@ -29,6 +30,7 @@ public class ControllerInput : MonoBehaviour
 
         Rotate = currentActionMap.FindAction("Rotate");
         Move = currentActionMap.FindAction("Move");
+
         UpDown = currentActionMap.FindAction("UpDown");
 
         Rotate.started += OnRotatePerformed; // ==> separate Achsen !
@@ -51,19 +53,29 @@ public class ControllerInput : MonoBehaviour
         {
             switch (InteractionManager.Instance.LeftGripIsActive)
             {
-                case false:
+                case true:
                     InteractionManager.Instance.SelectedObject.transform.Rotate(
                         rotate3DVector * (Time.deltaTime * speedRotate),
                         Space.World);
                     break;
-                case true:
-                    InteractionManager.Instance.SelectedObject.transform.Translate(
-                        move3DVector * (Time.deltaTime * speedMove),
-                        Space.World);
+                case false:
+                    InteractionManager.Instance.SelectedObject.transform.LookAt(mainCamera.transform.position);
+
+                    var forwardWithoutYAxis = new Vector3(
+                        InteractionManager.Instance.SelectedObject.transform.forward.x,
+                        0,
+                        InteractionManager.Instance.SelectedObject.transform.forward.z);
+
+                    var x = forwardWithoutYAxis * move3DVector.x * speedMove * Time.deltaTime;
+                    var y = forwardWithoutYAxis * move3DVector.z * speedMove * Time.deltaTime;
+
+                    InteractionManager.Instance.SelectedObject.transform.Translate(x + y);
+
+                    //InteractionManager.Instance.SelectedObject.transform.Translate(
+                    //  move3DVector * (Time.deltaTime * speedMove),
+                    //  Space.World);
                     break;
             }
-
-
         }
     }
 
@@ -76,7 +88,10 @@ public class ControllerInput : MonoBehaviour
     private void OnMovePerformed(InputAction.CallbackContext ctx)
     {
         Vector2 movement = ctx.ReadValue<Vector2>();
-        move3DVector = new Vector3(movement.y, 0, movement.x);
+
+        move3DVector = new Vector3(movement.x, 0, movement.y);
+
+        Debug.Log(move3DVector.ToString());
     }
 
     private void OnUpDownPerformed(InputAction.CallbackContext ctx)

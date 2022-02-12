@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class PositionRayCast : MonoBehaviour
+public class PositionManager : MonoBehaviour
 {
+    [SerializeField] private Light PositionLight;
     [SerializeField] private LineRenderer PositionLineRenderer;
     [SerializeField] private float ActivateDistance = 2.5f;
 
@@ -17,12 +18,17 @@ public class PositionRayCast : MonoBehaviour
     void Update()
     {
         PositionLineRenderer.enabled = false;
+        PositionLight.enabled = false;
         InteractionManager.Instance.GroundDistanceString = "no ground";
 
         if (InteractionManager.Instance.SelectedObject != null)
         {
+            
             Transform selectedObjectTransform = InteractionManager.Instance.SelectedObject.transform;
 
+            PositionLight.enabled = true;
+            PositionLight.transform.position = selectedObjectTransform.position;
+            
             RaycastHit hitInfo;
             if (Physics.Raycast(selectedObjectTransform.position, Vector3.down, out hitInfo))
             {

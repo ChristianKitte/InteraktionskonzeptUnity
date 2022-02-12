@@ -38,7 +38,7 @@
                     "name": "",
                     "id": "d9a4ba4a-a80d-41c8-a2a1-9bf3ca41d932",
                     "path": "<XRController>{LeftHand}/thumbstick",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Rotate",

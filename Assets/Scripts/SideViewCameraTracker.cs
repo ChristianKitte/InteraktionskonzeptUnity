@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 public class SideViewCameraTracker : MonoBehaviour
 {
     [SerializeField] private Camera Camera;
-    [SerializeField] private Light Light;
 
     private void Awake()
     {
@@ -32,19 +31,11 @@ public class SideViewCameraTracker : MonoBehaviour
             Camera.transform.LookAt(position);
             Camera.transform.Rotate(0, 0, 180);
 
-            Light.transform.position = new Vector3(
-                position.x + Vector3.right.x * Abstand,
-                position.y,
-                position.z);
-            Light.transform.LookAt(position);
-
             Camera.enabled = true;
-            Light.enabled = true;
         }
         else
         {
             Camera.enabled = false;
-            Light.enabled = false;
         }
     }
 }

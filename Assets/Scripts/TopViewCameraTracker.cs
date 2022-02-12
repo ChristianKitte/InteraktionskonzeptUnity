@@ -6,7 +6,6 @@ using UnityEngine;
 public class TopViewCameraTracker : MonoBehaviour
 {
     [SerializeField] private Camera Camera;
-    [SerializeField] private Light Light;
 
     private void Awake()
     {
@@ -29,20 +28,12 @@ public class TopViewCameraTracker : MonoBehaviour
                 position.z);
 
             Camera.transform.LookAt(position);
-            
-            Light.transform.position = new Vector3(
-                position.x,
-                position.y + Vector3.up.y * -Abstand,
-                position.z);
-            Light.transform.LookAt(position*-1);
 
             Camera.enabled = true;
-            Light.enabled = true;
         }
         else
         {
             Camera.enabled = false;
-            Light.enabled = false;
         }
     }
 }

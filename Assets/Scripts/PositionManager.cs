@@ -41,6 +41,7 @@ public class PositionManager : MonoBehaviour
                     PositionLineRenderer.SetPositions(new[] { _startRayVector3D, _endRayVector3D });
                     PositionLineRenderer.enabled = true;
 
+                    InteractionManager.Instance.GroundDistance = hitInfo.distance;
                     InteractionManager.Instance.GroundDistanceString = hitInfo.distance.ToString();
                 }
             }

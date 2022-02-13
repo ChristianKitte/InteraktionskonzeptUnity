@@ -7,46 +7,43 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ControllerInput : MonoBehaviour
 {
-    private InputAction Rotate;
-    private InputAction Move;
-    private InputAction UpDown;
+    private InputAction _rotateSelectedHorizontal;
+    private InputAction _moveSelectedForward;
+    private InputAction _moveSelectedRight;
+    private InputAction _raiseSelectedUp;
 
-    private Vector3 rotate3DVector;
-    private Vector3 move3DVector;
-    private Vector3 upDown3DVector;
+    private Vector3 _upDown3DVector;
 
-    [SerializeField] private Camera mainCamera;
+    private float _rotate; //Left (-1), Right (1)
+    private float _forward; //Backward (aka Down -1), Forward (aka Up 1) 
+    private float _right; //Left (-1), Right (1)
+
     [SerializeField] private InputActionAsset controllerAsset;
-    [SerializeField] GameObject leftController;
-
-    //[SerializeField] private CharacterController controller;
-    [SerializeField] private float speedMove;
-    [SerializeField] private float speedRotate;
-    [SerializeField] private float speedUpDown;
+    [SerializeField] private float speedMove = 1.0f;
+    [SerializeField] private float speedRotate = 1.0f;
+    [SerializeField] private float speedRaise = 1.0f;
 
     private void Awake()
     {
         var currentActionMap = controllerAsset.FindActionMap("Default");
 
-        Rotate = currentActionMap.FindAction("Rotate");
-        Move = currentActionMap.FindAction("Move");
+        _rotateSelectedHorizontal = currentActionMap.FindAction("RotateHorizontal", true);
+        _rotateSelectedHorizontal.performed += OnRotateSelectedHorizontalPerformed;
+        _rotateSelectedHorizontal.Enable();
 
-        UpDown = currentActionMap.FindAction("UpDown");
+        _moveSelectedForward = currentActionMap.FindAction("MoveForward", true);
+        _moveSelectedForward.performed += OnMoveSelectedForwardPerformed;
+        _moveSelectedForward.Enable();
 
-        Rotate.started += OnRotatePerformed; // ==> separate Achsen !
-        Rotate.canceled += OnRotatePerformed;
-        Rotate.Enable();
+        _moveSelectedRight = currentActionMap.FindAction("MoveRight", true);
+        _moveSelectedRight.performed += OnMoveSelectedRightPerformed;
+        _moveSelectedRight.Enable();
 
-        Move.started += OnMovePerformed; // ==> separate Achsen !
-        Move.canceled += OnMovePerformed;
-        Move.Enable();
-
-        UpDown.started += OnUpDownPerformed; // ==> separate Achsen !
-        UpDown.canceled += OnUpDownPerformed;
-        UpDown.Enable();
+        _raiseSelectedUp = currentActionMap.FindAction("RaiseUp", true);
+        _raiseSelectedUp.performed += OnRaiseSelectedUpPerformed;
+        _raiseSelectedUp.Enable();
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         if (InteractionManager.Instance.SelectedObject != null)
@@ -54,49 +51,78 @@ public class ControllerInput : MonoBehaviour
             switch (InteractionManager.Instance.LeftGripIsActive)
             {
                 case true:
+                    Vector3 rotate3DVector = new Vector3(0, _rotate, 0);
+
+                    if (_upDown3DVector != Vector3.zero)
+                    {
+                        InteractionManager.Instance.SelectedObject.transform.Translate(
+                            _upDown3DVector * (speedRaise * Time.deltaTime),
+                            Space.World);
+
+                        _upDown3DVector = Vector3.zero;
+                    }
+
                     InteractionManager.Instance.SelectedObject.transform.Rotate(
-                        rotate3DVector * (Time.deltaTime * speedRotate),
+                        rotate3DVector * (speedRotate * Time.deltaTime),
                         Space.World);
+
                     break;
+
                 case false:
-                    InteractionManager.Instance.SelectedObject.transform.LookAt(mainCamera.transform.position);
+                    Vector3 move3DVector = new Vector3(_right, 0, _forward);
 
-                    var forwardWithoutYAxis = new Vector3(
-                        InteractionManager.Instance.SelectedObject.transform.forward.x,
-                        0,
-                        InteractionManager.Instance.SelectedObject.transform.forward.z);
+                    InteractionManager.Instance.SelectedObject.transform.Translate(
+                        move3DVector * (speedMove * Time.deltaTime),
+                        Space.World);
 
-                    var x = forwardWithoutYAxis * move3DVector.x * speedMove * Time.deltaTime;
-                    var y = forwardWithoutYAxis * move3DVector.z * speedMove * Time.deltaTime;
-
-                    InteractionManager.Instance.SelectedObject.transform.Translate(x + y);
-
-                    //InteractionManager.Instance.SelectedObject.transform.Translate(
-                    //  move3DVector * (Time.deltaTime * speedMove),
-                    //  Space.World);
                     break;
             }
         }
     }
 
-    private void OnRotatePerformed(InputAction.CallbackContext ctx)
+    private void OnRotateSelectedHorizontalPerformed(InputAction.CallbackContext ctx)
     {
-        Vector2 rotation = ctx.ReadValue<Vector2>();
-        rotate3DVector = new Vector3(rotation.x, 0, rotation.y);
+        Vector2 value = ctx.ReadValue<Vector2>();
+        _rotate = value.x;
     }
 
-    private void OnMovePerformed(InputAction.CallbackContext ctx)
+    private void OnMoveSelectedRightPerformed(InputAction.CallbackContext ctx)
     {
-        Vector2 movement = ctx.ReadValue<Vector2>();
-
-        move3DVector = new Vector3(movement.x, 0, movement.y);
-
-        Debug.Log(move3DVector.ToString());
+        Vector2 value = ctx.ReadValue<Vector2>();
+        _right = value.x;
     }
 
-    private void OnUpDownPerformed(InputAction.CallbackContext ctx)
+    private void OnMoveSelectedForwardPerformed(InputAction.CallbackContext ctx)
     {
-        Vector2 upDown = ctx.ReadValue<Vector2>();
-        upDown3DVector = new Vector3(0, upDown.x, 0);
+        Vector2 value = ctx.ReadValue<Vector2>();
+        _forward = value.y;
+    }
+
+    private void OnRaiseSelectedUpPerformed(InputAction.CallbackContext ctx)
+    {
+        Vector2 value = ctx.ReadValue<Vector2>();
+
+        if (InteractionManager.Instance.SelectedObject != null)
+        {
+            RaycastHit hitInfo;
+            if (Physics.Raycast(
+                    InteractionManager.Instance.SelectedObject.transform.position,
+                    Vector3.down,
+                    out hitInfo))
+            {
+                if (hitInfo.distance <= 0)
+                {
+                    _upDown3DVector = Vector3.up;
+                }
+                else
+                {
+                    _upDown3DVector = new Vector3(0, value.y, 0);
+                }
+            }
+            else
+            {
+                _upDown3DVector = Vector3.up;
+            }
+        }
     }
 }

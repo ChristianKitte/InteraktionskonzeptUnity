@@ -54,6 +54,8 @@ public class InteractionManager : MonoBehaviour
         set => _startSelection = value;
     }
 
+    public float GroundDistance { get; set; }
+
     public string GroundDistanceString { get; set; }
 
     private void Awake()

@@ -12,8 +12,7 @@ public class TopViewCameraTracker : MonoBehaviour
         Camera = GetComponent<Camera>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (InteractionManager.Instance.SelectedObject != null)
         {
@@ -28,6 +27,7 @@ public class TopViewCameraTracker : MonoBehaviour
                 position.z);
 
             Camera.transform.LookAt(position);
+            Camera.transform.Rotate(0, 180, 0,Space.World);
 
             Camera.enabled = true;
         }

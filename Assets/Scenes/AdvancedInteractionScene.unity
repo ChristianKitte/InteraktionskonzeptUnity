@@ -1315,7 +1315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftController: {fileID: 7474194329031564755}
-  rightController: {fileID: 7474194328261849001}
 --- !u!114 &7474194327957300352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1328,12 +1327,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d01767baef095054e9776fcf112a3c16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 7474194328241601846}
   controllerAsset: {fileID: -944628639613478452, guid: 391359a5de03a524283ec0c70bb02abd, type: 3}
-  leftController: {fileID: 7474194329031564755}
-  speedMove: 50
-  speedRotate: 100
-  speedUpDown: 50
+  speedMove: 10
+  speedRotate: 10
+  speedRaise: 1
 --- !u!114 &7474194328241601840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2301,4 +2298,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leftController: {fileID: 7474194329031564755}
-  rightController: {fileID: 7474194328261849001}

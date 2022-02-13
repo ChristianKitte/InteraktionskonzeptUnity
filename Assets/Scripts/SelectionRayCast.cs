@@ -16,7 +16,6 @@ public class SelectionRayCast : MonoBehaviour
     private GameObject _currentObject;
     private Renderer _currentRenderer;
 
-    // Update is called once per frame
     void Update()
     {
         if (InteractionManager.Instance.LeftTriggerIsActive && _currentObject != null && _currentRenderer != null)
@@ -27,8 +26,6 @@ public class SelectionRayCast : MonoBehaviour
 
     private void LateUpdate()
     {
-        // Physics.Raycast gibt True zurück, sofern eine Kollision stattgefunden hat.
-        // Die Out Variable hit enthält in diesem Fall ein RaycastHit Object.
         if (InteractionManager.Instance.LeftTriggerIsActive && Physics.Raycast(
             startRay.transform.position,
             startRay.transform.forward,
@@ -37,7 +34,6 @@ public class SelectionRayCast : MonoBehaviour
         ))
         {
             _currentObject = hit.transform.gameObject;
-            //Debug.Log("_currentObject1: " + _currentObject);
 
             if (_currentObject != null)
             {

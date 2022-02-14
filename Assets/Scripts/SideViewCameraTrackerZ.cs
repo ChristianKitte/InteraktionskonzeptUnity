@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class SideViewCameraTracker : MonoBehaviour
+public class SideViewCameraTrackerZ : MonoBehaviour
 {
     [SerializeField] private Camera Camera;
+    [SerializeField] private float abstandZ = 10.0f;
 
     private void Awake()
     {
@@ -20,13 +21,11 @@ public class SideViewCameraTracker : MonoBehaviour
         {
             Transform selectedTransform = InteractionManager.Instance.SelectedObject.transform;
 
-            float Abstand = 10.0f;
-
             var position = selectedTransform.position;
             Camera.transform.position = new Vector3(
-                position.x + Vector3.right.x * Abstand,
+                position.x,
                 position.y,
-                position.z);
+                position.z + Vector3.back.z * abstandZ);
 
             Camera.transform.LookAt(position);
             Camera.transform.Rotate(0, 0, 180);

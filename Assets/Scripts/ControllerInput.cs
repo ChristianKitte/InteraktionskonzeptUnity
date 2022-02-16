@@ -121,7 +121,7 @@ public class ControllerInput : MonoBehaviour
             }
             else
             {
-                _upDown3DVector = Vector3.up;
+                _upDown3DVector = new Vector3(0, value.y, 0);
             }
         }
     }

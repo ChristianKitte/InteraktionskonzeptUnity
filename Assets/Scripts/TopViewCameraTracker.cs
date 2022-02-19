@@ -7,6 +7,7 @@ public class TopViewCameraTracker : MonoBehaviour
 {
     [SerializeField] private Camera Camera;
     [SerializeField] private float abstandY = 10.0f;
+    [SerializeField] private Light topLight;
 
     private void Awake()
     {
@@ -28,11 +29,15 @@ public class TopViewCameraTracker : MonoBehaviour
             Camera.transform.LookAt(position);
             Camera.transform.Rotate(0, 180, 0, Space.World);
 
+            topLight.transform.position = Camera.transform.position;
+
             Camera.enabled = true;
+            topLight.enabled = true;
         }
         else
         {
             Camera.enabled = false;
+            topLight.enabled = false;
         }
     }
 }

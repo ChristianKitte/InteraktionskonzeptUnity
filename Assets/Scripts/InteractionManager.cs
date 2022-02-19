@@ -8,6 +8,8 @@ using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
+    [SerializeField] private Camera infoCanvasCamera;
+
     private GameObject _selectedObject = null;
     private GameObject _currentObject = null;
 
@@ -66,6 +68,7 @@ public class InteractionManager : MonoBehaviour
         }
 
         Instance = this;
+        infoCanvasCamera.enabled = false;
     }
 
     private void LateUpdate()
@@ -86,6 +89,11 @@ public class InteractionManager : MonoBehaviour
 
                     _startSelection = false;
                     _currentObject = null;
+
+                    if (infoCanvasCamera != null)
+                    {
+                        infoCanvasCamera.enabled = true;
+                    }
                 }
                 else if (_selectedObject.Equals(_currentObject)) // deselektieren
                 {
@@ -95,6 +103,11 @@ public class InteractionManager : MonoBehaviour
 
                     _startSelection = false;
                     _currentObject = null;
+
+                    if (infoCanvasCamera != null)
+                    {
+                        infoCanvasCamera.enabled = false;
+                    }
                 }
                 else if (!_selectedObject.Equals(_currentObject)) // deselektieren und selektieren
                 {
@@ -108,6 +121,11 @@ public class InteractionManager : MonoBehaviour
 
                     _startSelection = false;
                     _currentObject = null;
+
+                    if (infoCanvasCamera != null)
+                    {
+                        infoCanvasCamera.enabled = true;
+                    }
                 }
             }
         }

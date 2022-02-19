@@ -8,6 +8,8 @@ public class SideViewCameraTrackerZ : MonoBehaviour
 {
     [SerializeField] private Camera Camera;
     [SerializeField] private float abstandZ = 10.0f;
+    [SerializeField] private float offset = 1.0f;
+    [SerializeField] private float rotation = 3.0f;
 
     private void Awake()
     {
@@ -24,11 +26,11 @@ public class SideViewCameraTrackerZ : MonoBehaviour
             var position = selectedTransform.position;
             Camera.transform.position = new Vector3(
                 position.x,
-                position.y,
+                position.y + offset,
                 position.z + Vector3.back.z * abstandZ);
 
             Camera.transform.LookAt(position);
-            Camera.transform.Rotate(0, 0, 180);
+            Camera.transform.Rotate(rotation, 0, 180);
 
             Camera.enabled = true;
         }

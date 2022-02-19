@@ -14,7 +14,5 @@ public class ArrowTracker : MonoBehaviour
         Vector3 lookForwardVector = new Vector3(arrowPosition.x + 0.1f, arrowPosition.y, arrowPosition.z);
         forwardArrowObject.transform.LookAt(lookForwardVector);
         forwardArrowObject.transform.Rotate(0, 180, 90, Space.World);
-
-        //rightArrowObject.transform.Rotate(90, 180, 0, Space.World);
     }
 }

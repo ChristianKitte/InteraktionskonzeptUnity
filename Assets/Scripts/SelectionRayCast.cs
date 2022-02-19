@@ -10,8 +10,8 @@ public class SelectionRayCast : MonoBehaviour
 {
     [SerializeField] private Transform startRay;
     [SerializeField] private float rayLength = 100f;
+
     [SerializeField] private string selectionTag;
-    [SerializeField] private InteractionManager interactionManager;
 
     private GameObject _currentObject;
     private Renderer _currentRenderer;
@@ -27,11 +27,11 @@ public class SelectionRayCast : MonoBehaviour
     private void LateUpdate()
     {
         if (InteractionManager.Instance.LeftTriggerIsActive && Physics.Raycast(
-            startRay.transform.position,
-            startRay.transform.forward,
-            out var hit,
-            rayLength
-        ))
+                startRay.transform.position,
+                startRay.transform.forward,
+                out var hit,
+                rayLength
+            ))
         {
             _currentObject = hit.transform.gameObject;
 

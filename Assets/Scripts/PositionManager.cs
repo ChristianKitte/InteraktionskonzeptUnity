@@ -10,6 +10,7 @@ public class PositionManager : MonoBehaviour
     [SerializeField] private LineRenderer PositionLineRenderer;
     [SerializeField] private float ActivateDistance = 2.5f;
 
+
     private void Start()
     {
         PositionLineRenderer = GetComponent<LineRenderer>();
@@ -19,16 +20,16 @@ public class PositionManager : MonoBehaviour
     {
         PositionLineRenderer.enabled = false;
         PositionLight.enabled = false;
+
         InteractionManager.Instance.GroundDistanceString = "no ground";
 
         if (InteractionManager.Instance.SelectedObject != null)
         {
-            
             Transform selectedObjectTransform = InteractionManager.Instance.SelectedObject.transform;
 
             PositionLight.enabled = true;
             PositionLight.transform.position = selectedObjectTransform.position;
-            
+
             RaycastHit hitInfo;
             if (Physics.Raycast(selectedObjectTransform.position, Vector3.down, out hitInfo))
             {

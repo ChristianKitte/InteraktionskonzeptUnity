@@ -30,7 +30,7 @@ public class DefaultInputActionsController : MonoBehaviour
         _rayInteractor = leftController.GetComponent<XRRayInteractor>();
         
         _controls = new XRIDefaultInputActions();
-        _controls.XRILeftHand.Select.started += ctx => { InteractionManager.Instance.StartSelection = true; };
+        _controls.XRILeftHand.Select.performed += ctx => { InteractionManager.Instance.StartSelection = true; };
     }
 
     private void Update()

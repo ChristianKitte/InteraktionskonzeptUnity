@@ -918,8 +918,8 @@ MonoBehaviour:
   m_EnableUIInteraction: 1
   m_AllowAnchorControl: 1
   m_UseForceGrab: 0
-  m_RotateSpeed: 90
-  m_TranslateSpeed: 1
+  m_RotateSpeed: 50
+  m_TranslateSpeed: 10
   m_AnchorRotateReferenceFrame: {fileID: 0}
 --- !u!120 &1452833742580993177
 LineRenderer:

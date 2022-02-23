@@ -6,10 +6,19 @@
 **Augmented and Virtual Reality (AVR)**
 
 **Dozent: Prof. Dr. Thies Pfeiffer**
- 
+**Semester:	WS 2021/22**
+
 --- 
  
-# Semesterarbeit zum Thema Benutzerinteraktion innerhalb einer virtuellen Umgebung
+# Studienarbeit Virtual Reality: Remote Steuerung
+
+ Innerhalb einer Virtuellen Umgebung (VR) sollen einzelne Objekte einer Gruppe über einen Zeitraum permanent 
+ selektiert und neu positioniert werden können. Selektion, Bewegung und das Ablegen sollen hierbei auch aus 
+ der Ferne (Remote) präzise und ohne direkte Sicht auf das ausgewählte Objekt möglich sein.
+ 
+ Ein Zusammenfassung der Arbeit ist als wissenschaftliches Poster verfügbar. Zusätzlich finden sie eine Aufzeichung
+ der Lösung der Aufgabenstellung einmal unter Anwendung eines naiven Vorgehen, sowie eines hierzu erstellten
+ Interaktionskonzeptes.
 
 
-**Semester:	WS 2021/22**
+

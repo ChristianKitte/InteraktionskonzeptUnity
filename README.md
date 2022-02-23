@@ -20,5 +20,12 @@
  der Lösung der Aufgabenstellung einmal unter Anwendung eines naiven Vorgehen, sowie eines hierzu erstellten
  Interaktionskonzeptes.
 
+Steuerung aus der Ferne - angepasste Umsetzung
+https://youtu.be/asTX6HlKR5Q
+ 
+
+ Steuerung aus der Ferne - einfache Umsetzung
+ https://youtu.be/vgA4OGv2m9I
+
 
 

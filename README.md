@@ -6,26 +6,32 @@
 **Augmented and Virtual Reality (AVR)**
 
 **Dozent: Prof. Dr. Thies Pfeiffer**
-**Semester:	WS 2021/22**
+
+**University of Applied Sciences Emden/Leer, Faculty of Technology, Department of Electrical Engineering and Informatics**
+
+**Wintersemester 2021/22**
 
 --- 
  
 # Studienarbeit Virtual Reality: Remote Steuerung
 
- Innerhalb einer Virtuellen Umgebung (VR) sollen einzelne Objekte einer Gruppe über einen Zeitraum permanent 
- selektiert und neu positioniert werden können. Selektion, Bewegung und das Ablegen sollen hierbei auch aus 
- der Ferne (Remote) präzise und ohne direkte Sicht auf das ausgewählte Objekt möglich sein.
+ Im Wintersemester 2021/22 wurde die Entwicklung eines Interaktionskonzeptes zum Thema Remote Steuerung als Studienarbeit 
+ umgesetzt. In der hier vorgestellten Arbeit soll innerhalb einer Virtuellen Umgebung (VR) einzelne Objekte einer Gruppe 
+ über einen Zeitraum permanent selektiert und neu positioniert werden können. Selektion, Bewegung und das Ablegen sollen 
+ hierbei auch aus der Ferne (Remote) präzise und ohne direkte Sicht auf das ausgewählte Objekt möglich sein.
  
- Ein Zusammenfassung der Arbeit ist als wissenschaftliches Poster verfügbar. Zusätzlich finden sie eine Aufzeichung
- der Lösung der Aufgabenstellung einmal unter Anwendung eines naiven Vorgehen, sowie eines hierzu erstellten
- Interaktionskonzeptes.
-
-Steuerung aus der Ferne - angepasste Umsetzung
-https://youtu.be/asTX6HlKR5Q
+ Die resultierende Lösung ist hier als Unity Projekt verfügbar. Eine Zusammenfassung der Arbeit ist als 
+ [wissenschaftliches Poster](https://github.com/ChristianKitte/InteraktionskonzeptUnity/blob/main/Doc/Semesterarbeit.pdf)
+ verfügbar. 
  
+ Zusätzlich befinden sich in den Ordner [Bin](https://github.com/ChristianKitte/InteraktionskonzeptUnity/tree/main/Bin) 
+ die kompilierte Lösung als Androidanwendung (.APK) für die Oculus. In dem 
+ Ordner [Streaming](https://github.com/ChristianKitte/InteraktionskonzeptUnity/tree/main/Streaming) 
+ befinden sich zwei Videos, welche die umgesetzt Lösung anhand einer beispielhaften Aufgabenstellung in 
+ Aktion zeigen.
 
- Steuerung aus der Ferne - einfache Umsetzung
- https://youtu.be/vgA4OGv2m9I
+- YouTube Video [Steuerung aus der Ferne - angepasste Umsetzung](https://youtu.be/Wzkt-cg_A-U)
+- YouTube Video [Steuerung aus der Ferne - einfache Umsetzung](https://youtu.be/TofhwbJO1fI)
 
 
 

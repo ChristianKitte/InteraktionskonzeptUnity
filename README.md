@@ -14,7 +14,7 @@
 
 # Studienarbeit Virtual Reality: Remote Steuerung
 
-Im Wintersemester 2021/22 wurde die Entwicklung eines Interaktionskonzeptes zum Thema Remote Steuerung sowie dessen prototypische Umsetzung als Studienarbeit umgesetzt.
+Im Wintersemester 2021/22 wurde die Entwicklung eines Interaktionskonzeptes zum Thema Remote Steuerung sowie dessen prototypische Umsetzung als Studienarbeit erstellt.
 
 Ziel war hierbei, innerhalb einer Virtuellen Umgebung (VR) einzelne Objekte einer Gruppe über einen Zeitraum hinweg permanent zu selektieren und neu zu positionieren. Selektion, Bewegung und das Ablegen sollten hierbei auch aus der Ferne (Remote) präzise und ohne direkte Sicht auf das ausgewählte Objekt möglich sein.
 

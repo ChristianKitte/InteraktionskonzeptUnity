@@ -25,7 +25,7 @@ Zusätzlich befinden sich in den Ordner [Bin](https://github.com/ChristianKitte/
 - YouTube Video [Steuerung aus der Ferne - einfache Umsetzung](https://youtu.be/TofhwbJO1fI)
 - YouTube Video [Steuerung aus der Ferne - angepasste Umsetzung](https://youtu.be/Wzkt-cg_A-U)
 
-Während für die Steuerung der Bewegung grundsätzlich und beim Greifen in der einfachen Lösung auf allgemeine Interaktionskonzepte zurückgegriffen wurde, ist das Mapping für die Objektsteuerung des linken Controllers in der angepassten Umsetzung komplett neu erstellt worden:
+Während für die Steuerung der Bewegung in beiden, für das Greifen nur in der einfachen Lösung auf allgemeine Interaktionskonzepte zurückgegriffen wurde, ist das Mapping für die Objektsteuerung des linken Controllers in der angepassten Umsetzung komplett neu erstellt worden:
 
 | Beabsichtigte Aktion | Interface | Interaktion | Ergebnis |
 | --- | --- | --- | --- |

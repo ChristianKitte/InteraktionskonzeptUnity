@@ -1,0 +1,66 @@
+\tikzposterlatexaffectionproofoff % 
+\usetheme{Simple} %
+
+% ---- Colors
+\definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
+\definecolor{titlecolor}{RGB}{74, 114, 159}
+\definecolor{titledarkcolor}{RGB}{51,102,153}
+\definecolor{LightGrey}{RGB}{232, 232, 232}
+\definecolor{Grey}{RGB}{222, 223, 225}
+\definecolor{DarkerGrey}{RGB}{215,217,219}
+\definecolor{FontColor}{RGB}{131,136,138}
+\definecolor{Red}{RGB}{204,0,0}
+\definecolor{L-lig}{RGB}{25,124,192}
+\definecolor{point-lig}{RGB}{54,104,163}
+\definecolor{G-lig}{RGB}{62,66,68}
+
+\definecolor{title-background}{RGB}{255,255,255}
+\definecolor{title-foreground}{RGB}{0,0,0}
+
+
+\definecolor{Orange}{RGB}{240,163,10} 
+\definecolor{Gray}{RGB}{186,200,211}
+\definecolor{LightRed}{RGB}{214,98,93}
+\definecolor{LightBlue}{RGB}{160,200,217}
+\definecolor{LightGreen}{RGB}{130,161,119}
+\definecolor{Violet}{RGB}{190,144,252}
+% ----
+
+\colorlet{blocktitlefgcolor}{point-lig} % Title of blocks
+\colorlet{blocktitlebgcolor}{Grey} % Lines for blocks
+%\colorlet{blockbodybgcolor}{mypink1}%????
+\colorlet{blockbodyfgcolor}{FontColor} % Textcolor within a block
+%\colorlet{innerblocktitlebgcolor}{G-lig}
+\colorlet{innerblocktitlebgcolor}{L-lig}
+\colorlet{innerblocktitlefgcolor}{white}
+
+% Notes
+\colorlet{notefrcolor}{Red!60} % Color of notes
+\colorlet{notefgcolor}{white} % Color of note test
+\colorlet{notebgcolor}{Red!60} % Color of note background
+
+
+% ---- Title
+\settitle{ 
+    \begin{minipage}{0.2\linewidth}
+        \vspace{-15cm}
+        %%% insert second logo at the top
+        %\transparent{0.6}\includegraphics[scale=1.1]{images/Logos/logoMIAI_white.png}
+        \vspace{8.0cm}     
+        \hspace{2.2cm}\transparent{1.0}\includegraphics[scale=1.0]{images/Logos/HSEL_Allgemeines_Logo.eps}                
+
+    \end{minipage}
+    \hspace{6cm}
+    \begin{minipage}[b]{0.8\linewidth}
+        \vspace{2.0cm}
+        \hspace{0cm}\color{title-foreground}{\Huge\textsc{\textbf{\@title}} \par } \vspace*{1em} \hspace{0cm}\color{title-foreground}{\Large \@author \par} \vspace*{1em} \hspace{0cm}{\@institute}\vspace{0.5cm} 
+    \end{minipage}
+}
+
+\definetitlestyle{sampletitle}{
+width=840mm, roundedcorners=0, linewidth=2pt, innersep=15pt,
+titletotopverticalspace=0mm, titletoblockverticalspace=30mm
+}{\begin{scope}[line width=\titlelinewidth, rounded corners=\titleroundedcorners]\draw[fill=title-background, color=title-background]
+(\titleposleft,\titleposbottom) rectangle (\titleposright,\titlepostop);
+\end{scope}}
+

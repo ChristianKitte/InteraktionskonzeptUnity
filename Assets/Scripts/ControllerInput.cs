@@ -1,28 +1,136 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR.Interaction.Toolkit;
 
+/// <summary>
+/// Wertet die Eingaben des linken Controllers aus und hält sie
+/// </summary>
 public class ControllerInput : MonoBehaviour
 {
+    /// <summary>
+    /// Hält die Action für Rotate
+    /// </summary>
     private InputAction _rotateSelectedHorizontal;
+
+    /// <summary>
+    /// Hält die Action für Move Forward
+    /// </summary>
     private InputAction _moveSelectedForward;
+
+    /// <summary>
+    /// Hält die Action für Move Right
+    /// </summary>
     private InputAction _moveSelectedRight;
+
+    /// <summary>
+    /// Hält die Action für Raise
+    /// </summary>
     private InputAction _raiseSelectedUp;
 
+    /// <summary>
+    /// Aktueller Wert für das Anheben
+    /// </summary>
     private Vector3 _upDown3DVector;
 
-    private float _rotate; //Left (-1), Right (1)
-    private float _forward; //Backward (aka Down -1), Forward (aka Up 1) 
+    /// <summary>
+    /// Aktueller Wert für die Rotation
+    /// </summary>
+    private float _rotate; //nach Left (-1), nach Right (1)
+
+    /// <summary>
+    /// Aktueller Wert für die Vorwärtsbewegung
+    /// </summary>
+    private float _forward; //Backward (aka Down -1), Forward (aka Up 1)
+
+    /// <summary>
+    /// Aktueller Wert für die Rechtsbewegung
+    /// </summary>
     private float _right; //Left (-1), Right (1)
 
+    /// <summary>
+    /// Das InputAsset des linken Controller
+    /// </summary>
     [SerializeField] private InputActionAsset controllerAsset;
+
+    /// <summary>
+    /// Die Geschwindigkeit bei der Bewegung
+    /// </summary>
     [SerializeField] private float speedMove = 1.0f;
+
+    /// <summary>
+    /// Die Geschwindigkeit beim Rotieren
+    /// </summary>
     [SerializeField] private float speedRotate = 1.0f;
+
+    /// <summary>
+    /// Die Geschwindigkeit beim Steigen
+    /// </summary>
     [SerializeField] private float speedRaise = 1.0f;
 
+    /// <summary>
+    /// Wird aufgerufen, wenn die Aktion zum Rotieren ausgeführt wurde 
+    /// </summary>
+    /// <param name="ctx">Eine Instanz von CallbackContext (Open XR)</param>
+    private void OnRotateSelectedHorizontalPerformed(InputAction.CallbackContext ctx)
+    {
+        Vector2 value = ctx.ReadValue<Vector2>();
+        _rotate = value.x;
+    }
+
+    /// <summary>
+    /// Wird aufgerufen, wenn die Aktion für nach rechts bewegen ausgeführt wurde 
+    /// </summary>
+    /// <param name="ctx">Eine Instanz von CallbackContext (Open XR)</param>
+    private void OnMoveSelectedRightPerformed(InputAction.CallbackContext ctx)
+    {
+        Vector2 value = ctx.ReadValue<Vector2>();
+        _right = value.x;
+    }
+
+    /// <summary>
+    /// Wird aufgerufen, wenn die Aktion für vorwärts bewegen ausgeführt wurde 
+    /// </summary>
+    /// <param name="ctx">Eine Instanz von CallbackContext (Open XR)</param>
+    private void OnMoveSelectedForwardPerformed(InputAction.CallbackContext ctx)
+    {
+        Vector2 value = ctx.ReadValue<Vector2>();
+        _forward = value.y;
+    }
+
+    /// <summary>
+    /// Wird aufgerufen, wenn die Aktion zum Anheben ausgeführt wurde 
+    /// </summary>
+    /// <param name="ctx">Eine Instanz von CallbackContext (Open XR)</param>
+    private void OnRaiseSelectedUpPerformed(InputAction.CallbackContext ctx)
+    {
+        Vector2 value = ctx.ReadValue<Vector2>();
+
+        if (InteractionManager.Instance.SelectedObject != null)
+        {
+            RaycastHit hitInfo;
+            if (Physics.Raycast(
+                    InteractionManager.Instance.SelectedObject.transform.position,
+                    Vector3.down,
+                    out hitInfo))
+            {
+                if (hitInfo.distance <= 0)
+                {
+                    _upDown3DVector = Vector3.up;
+                }
+                else
+                {
+                    _upDown3DVector = new Vector3(0, value.y, 0);
+                }
+            }
+            else
+            {
+                _upDown3DVector = new Vector3(0, value.y, 0);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Wird beim Laden der Komponente ausgeführt
+    /// </summary>
     private void Awake()
     {
         var currentActionMap = controllerAsset.FindActionMap("Default");
@@ -44,6 +152,9 @@ public class ControllerInput : MonoBehaviour
         _raiseSelectedUp.Enable();
     }
 
+    /// <summary>
+    /// Wird einmal je Frame nach Update aufgerufen
+    /// </summary>
     void LateUpdate()
     {
         if (InteractionManager.Instance.SelectedObject != null)
@@ -76,52 +187,6 @@ public class ControllerInput : MonoBehaviour
                         Space.World);
 
                     break;
-            }
-        }
-    }
-
-    private void OnRotateSelectedHorizontalPerformed(InputAction.CallbackContext ctx)
-    {
-        Vector2 value = ctx.ReadValue<Vector2>();
-        _rotate = value.x;
-    }
-
-    private void OnMoveSelectedRightPerformed(InputAction.CallbackContext ctx)
-    {
-        Vector2 value = ctx.ReadValue<Vector2>();
-        _right = value.x;
-    }
-
-    private void OnMoveSelectedForwardPerformed(InputAction.CallbackContext ctx)
-    {
-        Vector2 value = ctx.ReadValue<Vector2>();
-        _forward = value.y;
-    }
-
-    private void OnRaiseSelectedUpPerformed(InputAction.CallbackContext ctx)
-    {
-        Vector2 value = ctx.ReadValue<Vector2>();
-
-        if (InteractionManager.Instance.SelectedObject != null)
-        {
-            RaycastHit hitInfo;
-            if (Physics.Raycast(
-                    InteractionManager.Instance.SelectedObject.transform.position,
-                    Vector3.down,
-                    out hitInfo))
-            {
-                if (hitInfo.distance <= 0)
-                {
-                    _upDown3DVector = Vector3.up;
-                }
-                else
-                {
-                    _upDown3DVector = new Vector3(0, value.y, 0);
-                }
-            }
-            else
-            {
-                _upDown3DVector = new Vector3(0, value.y, 0);
             }
         }
     }

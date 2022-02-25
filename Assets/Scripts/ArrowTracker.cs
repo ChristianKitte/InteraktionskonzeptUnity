@@ -1,12 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Richtet die Richtungsanzeige in jedem Frame neu aus
+/// </summary>
 public class ArrowTracker : MonoBehaviour
 {
+    /// <summary>
+    /// Hält ein ein Game Object, dass als Vorwärts/Rechtszeiger in Z/X Richtung fungiert
+    /// </summary>
     [SerializeField] private GameObject forwardArrowObject;
-    [SerializeField] private GameObject rightArrowObject;
 
+    /// <summary>
+    /// Wird einmal je Frame nach Update aufgerufen und richtet den forwardArrowObject aus
+    /// </summary>
     void Update()
     {
         Vector3 arrowPosition = forwardArrowObject.transform.position;

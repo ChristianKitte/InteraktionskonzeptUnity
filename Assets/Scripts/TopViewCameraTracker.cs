@@ -1,19 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Steuert die Kamera zur Sicht von oben auf ein selektiertes Objekt
+/// </summary>
 public class TopViewCameraTracker : MonoBehaviour
 {
+    /// <summary>
+    /// Eine Instanz vom Camera
+    /// </summary>
     [SerializeField] private Camera Camera;
+
+    /// <summary>
+    /// Der Abstand zum selektierten Objekt auf der globalen Y Achse
+    /// </summary>
     [SerializeField] private float abstandY = 10.0f;
+
+    /// <summary>
+    /// Eine Instanz von Light
+    /// </summary>
     [SerializeField] private Light topLight;
 
+    /// <summary>
+    /// Wird beim Laden der Komponente ausgeführt
+    /// </summary>
     private void Awake()
     {
         Camera = GetComponent<Camera>();
     }
 
+    /// <summary>
+    /// Wird einmal je Frame aufgerufen
+    /// </summary>
     private void Update()
     {
         if (InteractionManager.Instance.SelectedObject != null)

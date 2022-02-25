@@ -1,19 +1,20 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Steuert die Anzeige von Objekthöhe und Objektname
+/// </summary>
 public class InfotextManager : MonoBehaviour
 {
+    /// <summary>
+    /// Eine Instanz von TextMeshPro
+    /// </summary>
     private TextMeshPro _textMeshPro;
 
-    private void Awake()
-    {
-        _textMeshPro = GetComponent<TextMeshPro>();
-    }
-
+    /// <summary>
+    /// Setzt den aktuellen Text an Hand der Werte aus dem InteractionManager 
+    /// </summary>
     private void SetText()
     {
         String _infoText = "Kein aktives Objekt";
@@ -42,12 +43,23 @@ public class InfotextManager : MonoBehaviour
             _infoText = "";
         }
 
-        _textMeshPro.SetText(_infoText,true);
+        _textMeshPro.SetText(_infoText, true);
         _textMeshPro.color = _ionfoColor;
 
         _textMeshPro.ForceMeshUpdate();
     }
 
+    /// <summary>
+    /// Wird beim Laden der Komponente ausgeführt
+    /// </summary>
+    private void Awake()
+    {
+        _textMeshPro = GetComponent<TextMeshPro>();
+    }
+
+    /// <summary>
+    /// Wird einmal je Frame nach Update aufgerufen
+    /// </summary>
     private void LateUpdate()
     {
         SetText();

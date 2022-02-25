@@ -1,22 +1,41 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
+/// <summary>
+/// Steuert die Kamera zur Sicht von hinten auf ein selektiertes Objekt
+/// </summary>
 public class SideViewCameraTrackerZ : MonoBehaviour
 {
+    /// <summary>
+    /// Eine Instanz vom Camera
+    /// </summary>
     [SerializeField] private Camera Camera;
+
+    /// <summary>
+    /// Der Abstand zum selektierten Objekt auf der globalen Z Achse
+    /// </summary>
     [SerializeField] private float abstandZ = 10.0f;
+
+    /// <summary>
+    /// Die Höhe der Kamera relativ zum selektierten Objekt
+    /// </summary>
     [SerializeField] private float offset = 1.0f;
+
+    /// <summary>
+    /// Die Rotation der Kamera um die X Achse relative zur Blickrichtung der Kamera
+    /// </summary>
     [SerializeField] private float rotation = 3.0f;
 
+    /// <summary>
+    /// Wird beim Laden der Komponente ausgeführt
+    /// </summary>
     private void Awake()
     {
         Camera = GetComponent<Camera>();
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Wird einmal je Frame aufgerufen
+    /// </summary>
     void Update()
     {
         if (InteractionManager.Instance.SelectedObject != null)

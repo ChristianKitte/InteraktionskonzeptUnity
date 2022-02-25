@@ -1,65 +1,114 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using TMPro;
-using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Steuert das Zusammenspiel aller Komponenten und hält den jeweils aktuellen Zustand
+/// </summary>
 public class InteractionManager : MonoBehaviour
 {
     [SerializeField] private Camera infoCanvasCamera;
 
+    /// <summary>
+    /// Das aktuell selektierte Objekt
+    /// </summary>
     private GameObject _selectedObject = null;
+
+    /// <summary>
+    /// Das aktuell aktive Objekt
+    /// </summary>
     private GameObject _currentObject = null;
 
+    /// <summary>
+    /// Gibt an, ob der Trigger des linken Controller gedrückt ist
+    /// </summary>
     private bool _leftLeftTriggerIsActive = false;
+
+    /// <summary>
+    /// Gibt an, ob die Grip Taste des linken Controller gedrückt ist
+    /// </summary>
     private bool _leftGripIsActive = false;
+
+    /// <summary>
+    /// Gibt an, ob der Trigger des rechten Controller gedrückt ist
+    /// </summary>
     private bool _rightGripIsActive = false;
+
+    /// <summary>
+    /// Gibt an, ob eine Selektion gestartet wurde (aktiv ist)
+    /// </summary>
     private bool _startSelection = false;
 
+    /// <summary>
+    /// Die einzoge Instanz des Objektes
+    /// </summary>
     public static InteractionManager Instance { get; private set; }
 
+    /// <summary>
+    /// Legt das aktuell selektierte Objekt fest oder gibt es zurück
+    /// </summary>
     public GameObject SelectedObject
     {
         get => _selectedObject;
         set => _selectedObject = value;
     }
 
+    /// <summary>
+    /// Legt das aktuell aktive Objekt fest oder gibt es zurück
+    /// </summary>
     public GameObject CurrentObject
     {
         get => _currentObject;
         set => _currentObject = value;
     }
 
+    /// <summary>
+    /// Legt fest oder gibt zurück, ob der Trigger des linken Controllers gedrückt ist
+    /// </summary>
     public bool LeftTriggerIsActive
     {
         get => _leftLeftTriggerIsActive;
         set => _leftLeftTriggerIsActive = value;
     }
 
+    /// <summary>
+    /// Legt fest oder gibt zurück, ob die Grip Taste des linken Controllers gedrückt ist
+    /// </summary>
     public bool LeftGripIsActive
     {
         get => _leftGripIsActive;
         set => _leftGripIsActive = value;
     }
 
+    /// <summary>
+    /// Legt fest oder gibt zurück, ob die Grip Taste des rechten Controllers gedrückt ist
+    /// </summary>
     public bool RightGripIsActive
     {
         get => _rightGripIsActive;
         set => _rightGripIsActive = value;
     }
 
+    /// <summary>
+    /// Legt fest oder gibt zurück, ob eine Selektion gestartet wurde (aktiv ist)
+    /// </summary>
     public bool StartSelection
     {
         get => _startSelection;
         set => _startSelection = value;
     }
 
+    /// <summary>
+    /// Legt fest oder gibt die aktuelle Distanz zum definierten Grund zurück 
+    /// </summary>
     public float GroundDistance { get; set; }
 
+    /// <summary>
+    /// Legt fest oder gibt die aktuelle Distanz zum definierten Grund als String zurück
+    /// </summary>
     public string GroundDistanceString { get; set; }
 
+    /// <summary>
+    /// Wird beim Laden der Komponente ausgeführt 
+    /// </summary>
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -71,6 +120,9 @@ public class InteractionManager : MonoBehaviour
         infoCanvasCamera.enabled = false;
     }
 
+    /// <summary>
+    /// Wird einmal je Frame nach Update aufgerufen
+    /// </summary>
     private void LateUpdate()
     {
         if (_startSelection && _leftLeftTriggerIsActive)
@@ -131,6 +183,9 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gibt einen Debugstring in die Konsole aus
+    /// </summary>
     public void WriteDebugMessage()
     {
         if (_currentObject != null)

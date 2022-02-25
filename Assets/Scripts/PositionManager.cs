@@ -1,21 +1,36 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
+/// <summary>
+/// Steuert das Positionslicht selektierter Objekte sowie dessen Lot zum Grund
+/// </summary>
 public class PositionManager : MonoBehaviour
 {
+    /// <summary>
+    /// Eine Instanz einer Lichtquelle
+    /// </summary>
     [SerializeField] private Light PositionLight;
+
+    /// <summary>
+    /// Eine Instanz eines Linien Renderer
+    /// </summary>
     [SerializeField] private LineRenderer PositionLineRenderer;
+
+    /// <summary>
+    /// Die Distanz, ab dessen Unterschreitung eine Linie gezeichnet wird 
+    /// </summary>
     [SerializeField] private float ActivateDistance = 2.5f;
 
-
+    /// <summary>
+    /// Wird kurz vor dem ersten Aufruf einer Update Methode aufgerufen
+    /// </summary>
     private void Start()
     {
         PositionLineRenderer = GetComponent<LineRenderer>();
     }
 
+    /// <summary>
+    /// Wird einmal je Frame aufgerufen
+    /// </summary>
     void Update()
     {
         PositionLineRenderer.enabled = false;

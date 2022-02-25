@@ -18,7 +18,7 @@ Im Wintersemester 2021/22 wurde die Entwicklung eines Interaktionskonzeptes zum 
 
 Ziel war hierbei, innerhalb einer Virtuellen Umgebung (VR) einzelne Objekte einer Gruppe über einen Zeitraum hinweg permanent zu selektieren und neu zu positionieren. Selektion, Bewegung und das Ablegen sollten hierbei auch aus der Ferne (Remote) präzise und ohne direkte Sicht auf das ausgewählte Objekt möglich sein.
 
-Die Umsetzung erfolgte auf Basis von Unity unter Verwendung eines Oculus Headsets und ist hier verfügbar. Als Referenz wurde zudem eine naive Problemlösung mit Standardkomponenten und Fähigkeiten umgesetzt. Eine Zusammenfassung der Arbeit ist als [wissenschaftliches Poster](https://github.com/ChristianKitte/InteraktionskonzeptUnity/blob/main/Doc/Semesterarbeit.pdf) verfügbar.
+Die Umsetzung erfolgte auf Basis von Unity unter Verwendung eines Oculus Headsets und ist hier verfügbar. Als Referenz wurde zudem eine naive Problemlösung mit Standardkomponenten und Fähigkeiten umgesetzt. Eine Zusammenfassung der Arbeit ist als [wissenschaftliches Poster](https://github.com/ChristianKitte/InteraktionskonzeptUnity/blob/main/Poster/Studienarbeit%20Virtual%20Reality%20-%20Remote%20Steuerung.pdf) verfügbar.
 
 Zusätzlich befinden sich in den Ordner [Bin](https://github.com/ChristianKitte/InteraktionskonzeptUnity/tree/main/Bin) die kompilierte Lösung beider Versionen als Android Anwendung (.APK) für die Oculus. In dem Ordner [Streaming](https://github.com/ChristianKitte/InteraktionskonzeptUnity/tree/main/Streaming) befinden sich zwei herunterskalierte Videos, welche den Einsatz beider Lösungen anhand einer beispielhaften Aufgabenstellung in Aktion zeigen. Videos in voller Auflösung finden sich auf YouTube.
 
